@@ -1,26 +1,48 @@
 # players_trackers
-Soccer Player Tracker is a computer vision project designed to track players in football (soccer) videos in real-time. The system detects players and keeps track of their movements across frames, assigning consistent IDs to each player.
 
-Features
-Real-time tracking of soccer players in videos.
-Uses YOLOv10 for player detection.
-Implements ByteTrack tracker for consistent ID assignment and smooth tracking.
-Displays annotated video with bounding boxes and player IDs.
-Can handle occlusions and fast movements on the field.
-Dataset
-The project works on football match videos.
-Players are detected using a pre-trained YOLO model.
-No additional labeling is required for tracking, but detection quality affects tracking performance.
-Tracking
-The model detects players in each video frame.
-ByteTrack maintains the identity of each player over time.
-Counts and IDs players as they move across the pitch.
-Allows for statistics or analytics on player movement if needed.
-Performance
-Works efficiently on modern GPUs.
-Robust to occlusions and multiple players in close proximity.
-Can be extended to include ball tracking, team analysis, or tactical insights.
-Notes
-Video resolution affects detection and tracking accuracy.
-Tracking performance depends on the confidence threshold and IOU settings.
-The system can be adapted for other sports or multi-object tracking scenarios.
+
+## Soccer Player Tracker
+
+**Soccer Player Tracker** is a real-time computer vision solution engineered to monitor athlete movement during football matches. By leveraging state-of-the-art detection and association algorithms, the system maintains consistent identities for players even in high-speed, crowded environments.
+
+### Key Features
+
+* **Real-Time Execution:** Optimized for live video stream processing.
+* **Deep Learning Detection:** Utilizes **YOLOv10** for high-speed, accurate bounding box generation.
+* **Persistent Re-Identification:** Implements **ByteTrack** to solve the "identity switching" problem during player crossovers.
+* **Dynamic Annotation:** Renders real-time visual overlays with unique IDs and bounding boxes.
+* **Occlusion Handling:** Robustly manages scenarios where players are obscured by referees, teammates, or fast camera pans.
+
+---
+
+### 🛠 Tech Stack & Methodology
+
+The system follows a **Tracking-by-Detection** paradigm:
+
+| Component | Technology | Role |
+| --- | --- | --- |
+| **Detection** | YOLOv10 | Locates players and provides confidence scores per frame. |
+| **Tracking** | ByteTrack | Associates detections across frames using Kalman filters and IoU. |
+| **Processing** | OpenCV / PyTorch | Handles video I/O and GPU-accelerated tensor operations. |
+
+---
+
+### 📊 Performance & Optimization
+
+* **Hardware:** Designed for modern GPUs (CUDA-enabled) to ensure low-latency inference.
+* **Dataset:** Built to work on standard broadcast footage; no manual labeling is required for deployment.
+* **Fine-Tuning:** Accuracy is highly dependent on the **Confidence Threshold** and **Intersection over Union (IoU)** settings.
+> **Note:** Higher video resolutions (e.g., 1080p or 4K) significantly improve detection of distant players but increase the computational load on the GPU.
+
+
+
+---
+
+### 📈 Future Roadmap
+
+* **Ball Tracking:** Integrating specialized small-object detection for the match ball.
+* **Team Classification:** Using color histograms or CNNs to automatically group players by jersey color.
+* **Tactical Analytics:** Generating heatmaps and distance-covered statistics for post-match analysis.
+
+---
+
